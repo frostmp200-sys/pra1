@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LuxuryCars - Премиальные автомобили</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .user-greeting {
+            color: white;
+            margin-right: 15px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LuxuryCars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li class="active"><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth" id="authSection">
+                <a href="login.html" class="btn">Вход</a>
+                <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="container">
+            <h1>Премиальные автомобили</h1>
+            <p>Эксклюзивные модели от ведущих мировых производителей</p>
+            <a href="catalog.html" class="btn btn-large">Смотреть каталог</a>
+        </div>
+    </section>
+
+    <section class="featured">
+        <div class="container">
+            <h2>Рекомендуемые модели</h2>
+            <div class="cars-grid">
+                <div class="car-card">
+                    <a href="car-bmw-m8.html">
+                        <div class="car-image">
+                            <img src="bmww.jpg" alt="BMW M8">
+                        </div>
+                        <h3>BMW M8</h3>
+                        <div class="car-info">
+                            <span>625 л.с.</span>
+                            <span>3.2 сек</span>
+                            <span>от 12.9 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="car-card">
+                    <a href="car-mercedes-s.html">
+                        <div class="car-image">
+                            <img src="mers.jpg" alt="Mercedes S-class">
+                        </div>
+                        <h3>Mercedes S-class</h3>
+                        <div class="car-info">
+                            <span>503 л.с.</span>
+                            <span>4.4 сек</span>
+                            <span>от 14.2 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+                
+                <div class="car-card">
+                    <a href="car-cadillac-escalade.html">
+                        <div class="car-image">
+                            <img src="cadi.jpg" alt="Cadillac Escalade">
+                        </div>
+                        <h3>Cadillac Escalade</h3>
+                        <div class="car-info">
+                            <span>426 л.с.</span>
+                            <span>6.2 л V8</span>
+                            <span>от 10.5 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="advantages">
+        <div class="container">
+            <h2>Почему выбирают нас</h2>
+            <div class="advantages-grid">
+                <div class="advantage">
+                    <div class="icon">✓</div>
+                    <h3>Гарантия качества</h3>
+                    <p>Все автомобили проходят тщательную проверку</p>
+                </div>
+                <div class="advantage">
+                    <div class="icon">🏆</div>
+                    <h3>Официальный дилер</h3>
+                    <p>Работаем напрямую с производителями</p>
+                </div>
+                <div class="advantage">
+                    <div class="icon">🔧</div>
+                    <h3>Сервисное обслуживание</h3>
+                    <p>Собственный сервисный центр</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>LuxuryCars</h4>
+                    <p>Продажа премиальных автомобилей с 2010 года</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Автозаводская, 23</p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Часы работы</h4>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 LuxuryCars. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Проверка авторизации при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const authSection = document.getElementById('authSection');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (currentUser) {
+                // Если пользователь авторизован, меняем блок авторизации
+                authSection.innerHTML = `
+                    <span class="user-greeting">${currentUser.name}</span>
+                    <a href="#" id="logout" class="btn">Выйти</a>
+                    <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+                `;
+                
+                // Обработчик выхода
+                document.getElementById('logout').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('currentUser');
+                    window.location.reload();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Запись на тест-драйв | LuxuryCars</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Общие стили */
+        input:invalid, select:invalid {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+        }
+        input:valid, select:valid {
+            border-color: #28a745;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-submit {
+            text-align: center;
+            margin-top: 30px;
+        }
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .user-greeting {
+            color: white;
+            margin-right: 15px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        .selected-car-notice {
+            color: #28a745;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+        .locked-field {
+            background-color: #f0f0f0;
+            cursor: not-allowed;
+        }
+        /* Стили для сообщений */
+        .login-required {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        /* Стили для превью автомобиля */
+        .car-image-preview {
+            max-width: 100%;
+            height: auto;
+            max-height: 200px;
+            margin-top: 10px;
+            border-radius: 4px;
+            display: none;
+            border: 1px solid #ddd;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .car-image-container {
+            text-align: center;
+            margin: 15px 0;
+            min-height: 220px;
+        }
+    </style>
+</head>
+<body class="appointment-page">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LuxuryCars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth" id="authSection">
+                <a href="login.html" class="btn">Вход</a>
+                <a href="appointment.html" class="btn btn-primary active">Тест-драйв</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="appointment">
+            <div class="container">
+                <h1>Запись на тест-драйв</h1>
+                
+                <div id="loginRequired" class="login-required">
+                    <p>Для записи на тест-драйв необходимо <a href="login.html">войти в аккаунт</a>.</p>
+                </div>
+                
+                <div id="successMessage" class="success-message"></div>
+                
+                <form id="testDriveForm">
+                    <div class="form-group">
+                        <label for="car-model">Модель автомобиля*</label>
+                        <div id="car-notice"></div>
+                        <select id="car-model" required>
+                            <option value="">-- Выберите модель --</option>
+                            <option value="bmw-m8">BMW M8 Competition</option>
+                            <option value="mercedes-s">Mercedes S 580</option>
+                            <option value="cadillac">Cadillac Escalade</option>
+                            <option value="porsche">Porsche 911 Turbo S</option>
+                            <option value="lamborghini-urus">Lamborghini Urus</option>
+                            <option value="lamborghini-aventador">Lamborghini Aventador SVJ</option>
+                            <option value="bugatti-chiron">Bugatti Chiron</option>
+                            <option value="tesla-cyberbeast">Tesla Cybertruck Cyberbeast</option>
+                            <option value="rolls-royce-phantom">Rolls-Royce Phantom VIII</option>
+                        </select>
+                        <div class="car-image-container">
+                            <img id="carImagePreview" class="car-image-preview" src="" alt="Превью автомобиля">
+                        </div>
+                        <div class="error-message">Пожалуйста, выберите модель</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="name">Ваше имя*</label>
+                        <input type="text" id="name" required minlength="2" pattern="[А-Яа-яЁёA-Za-z\s]+">
+                        <div class="error-message">Имя должно содержать только буквы (минимум 2)</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="phone">Телефон*</label>
+                        <input type="tel" id="phone" required 
+                               pattern="\+7\s?[0-9]{3}\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}">
+                        <div class="error-message">Формат: +7 XXX XXX XX XX</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="email">Email*</label>
+                        <input type="email" id="email" required>
+                        <div class="error-message">Введите корректный email</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="date">Дата тест-драйва*</label>
+                        <input type="date" id="date" required>
+                        <div class="error-message">Выберите дату</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="time">Время*</label>
+                        <select id="time" required>
+                            <option value="">-- Выберите время --</option>
+                            <option value="10:00">10:00</option>
+                            <option value="11:00">11:00</option>
+                            <option value="12:00">12:00</option>
+                            <option value="13:00">13:00</option>
+                            <option value="14:00">14:00</option>
+                            <option value="15:00">15:00</option>
+                            <option value="16:00">16:00</option>
+                            <option value="17:00">17:00</option>
+                        </select>
+                        <div class="error-message">Выберите время</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="comments">Комментарии (необязательно)</label>
+                        <textarea id="comments" rows="3"></textarea>
+                    </div>
+                    
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-large">Записаться на тест-драйв</button>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>LuxuryCars</h4>
+                    <p>Продажа премиальных автомобилей с 2010 года</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Автозаводская, 23</p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Часы работы</h4>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© <script>document.write(new Date().getFullYear())</script> LuxuryCars. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Установка минимальной даты (сегодня)
+        document.getElementById('date').min = new Date().toISOString().split("T")[0];
+        
+        // Валидация телефона
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9+]/g, '');
+            if (!this.value.startsWith('+7') && this.value.length > 0) {
+                this.value = '+7' + this.value;
+            }
+            if (this.value.length > 12) {
+                this.value = this.value.substring(0, 12);
+            }
+        });
+        
+        // Обработка ошибок
+        const form = document.getElementById('testDriveForm');
+        const inputs = form.querySelectorAll('input, select');
+        
+        inputs.forEach(input => {
+            input.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                this.nextElementSibling.style.display = 'block';
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.validity.valid) {
+                    this.nextElementSibling.style.display = 'none';
+                }
+            });
+        });
+        
+        // Отправка формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Проверка авторизации
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            if (!currentUser) {
+                document.getElementById('loginRequired').style.display = 'block';
+                document.getElementById('loginRequired').scrollIntoView({ behavior: 'smooth' });
+                alert('Для записи на тест-драйв необходимо войти в аккаунт.');
+                return;
+            }
+            
+            if (!this.checkValidity()) {
+                alert('Заполните все обязательные поля корректно!');
+                return;
+            }
+
+            // Сохраняем заявку
+            const requestData = {
+                id: Date.now(),
+                carModel: document.getElementById('car-model').value,
+                carModelText: document.getElementById('car-model').options[document.getElementById('car-model').selectedIndex].text,
+                name: document.getElementById('name').value,
+                phone: document.getElementById('phone').value,
+                email: document.getElementById('email').value,
+                date: document.getElementById('date').value,
+                time: document.getElementById('time').value,
+                comments: document.getElementById('comments').value,
+                status: 'pending',
+                createdAt: new Date().toLocaleString(),
+                userId: currentUser.id
+            };
+
+            const requests = JSON.parse(localStorage.getItem('testDriveRequests')) || [];
+            requests.push(requestData);
+            localStorage.setItem('testDriveRequests', JSON.stringify(requests));
+
+            // Показываем сообщение об успехе
+            showSuccessMessage(requestData);
+            
+            // Сбрасываем форму, кроме выбранного автомобиля
+            const selectedCar = document.getElementById('car-model').value;
+            this.reset();
+            if (selectedCar) {
+                document.getElementById('car-model').value = selectedCar;
+            }
+        });
+
+        // Функция показа сообщения об успешной записи
+        function showSuccessMessage(data) {
+            const successMessage = document.getElementById('successMessage');
+            const formattedDate = new Date(data.date).toLocaleDateString('ru-RU', {
+                day: 'numeric',
+                month: 'long',
+                year: 'numeric'
+            });
+            
+            successMessage.innerHTML = `
+                <h3>Спасибо, ${data.name}!</h3>
+                <p>Вы успешно записаны на тест-драйв ${data.carModelText}.</p>
+                <p><strong>Дата:</strong> ${formattedDate} в ${data.time}</p>
+                <p>Мы отправили подтверждение на email: ${data.email}</p>
+                ${data.comments ? `<p><strong>Ваш комментарий:</strong> ${data.comments}</p>` : ''}
+            `;
+            successMessage.style.display = 'block';
+            
+            // Прокрутка к сообщению
+            successMessage.scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // Проверка авторизации и обработка выбранного автомобиля
+        document.addEventListener('DOMContentLoaded', function() {
+            // Проверка авторизации
+            const authSection = document.getElementById('authSection');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const loginRequired = document.getElementById('loginRequired');
+            
+            if (currentUser) {
+                authSection.innerHTML = `
+                    <span class="user-greeting">${currentUser.name}</span>
+                    <a href="#" id="logout" class="btn">Выйти</a>
+                    <a href="appointment.html" class="btn btn-primary active">Тест-драйв</a>
+                `;
+                
+                document.getElementById('logout').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('currentUser');
+                    window.location.reload();
+                });
+
+                // Автозаполнение данных пользователя
+                document.getElementById('name').value = currentUser.name || '';
+                document.getElementById('email').value = currentUser.email || '';
+                if (currentUser.phone) {
+                    document.getElementById('phone').value = currentUser.phone;
+                }
+            } else {
+                // Показываем сообщение о необходимости входа
+                loginRequired.style.display = 'block';
+            }
+
+            // Обработка выбранного автомобиля
+            const urlParams = new URLSearchParams(window.location.search);
+            const selectedCar = urlParams.get('car');
+            const carSelect = document.getElementById('car-model');
+            const carNotice = document.getElementById('car-notice');
+            const carImagePreview = document.getElementById('carImagePreview');
+
+            // Объект с изображениями автомобилей
+            const carImages = {
+                'bmw-m8': 'bmww.jpg',
+                'mercedes-s': 'mers.jpg',
+                'cadillac': 'cadi.jpg',
+                'porsche': 'porsh.jpg',
+                'lamborghini-urus': 'urus.jpg',
+                'lamborghini-aventador': 'aven.jpg',
+                'bugatti-chiron': 'buga.jpg',
+                'tesla-cyberbeast': 'tesla.jpg',
+                'rolls-royce-phantom': 'RR.jpg'
+            };
+
+            // Функция показа изображения автомобиля
+            function showCarImage(carValue) {
+                if (carImages[carValue]) {
+                    carImagePreview.src = carImages[carValue];
+                    carImagePreview.style.display = 'block';
+                    
+                    // Предзагрузка изображения
+                    const img = new Image();
+                    img.src = carImages[carValue];
+                } else {
+                    carImagePreview.style.display = 'none';
+                }
+            }
+
+            // Обработчик изменения выбора автомобиля
+            carSelect.addEventListener('change', function() {
+                if (this.value) {
+                    showCarImage(this.value);
+                } else {
+                    carImagePreview.style.display = 'none';
+                }
+            });
+
+            // Если автомобиль выбран через URL
+            if (selectedCar) {
+                carSelect.value = selectedCar;
+                carSelect.classList.add('locked-field');
+                carSelect.disabled = true;
+
+                const carName = carSelect.options[carSelect.selectedIndex].text;
+                carNotice.innerHTML = `<p class="selected-car-notice">Вы выбрали: ${carName}</p>`;
+                showCarImage(selectedCar);
+            }
+
+            // Показать изображение при загрузке, если автомобиль уже выбран
+            if (carSelect.value) {
+                showCarImage(carSelect.value);
+            }
+
+            // Проверка занятых дат и времени
+            document.getElementById('date').addEventListener('change', function() {
+                checkAvailableTimes();
+            });
+
+            function checkAvailableTimes() {
+                const selectedDate = document.getElementById('date').value;
+                if (!selectedDate) return;
+
+                const requests = JSON.parse(localStorage.getItem('testDriveRequests')) || [];
+                const timeSelect = document.getElementById('time');
+                const bookedTimes = requests
+                    .filter(req => req.date === selectedDate && req.status !== 'cancelled')
+                    .map(req => req.time);
+
+                // Помечаем занятые времена
+                Array.from(timeSelect.options).forEach(option => {
+                    if (option.value && bookedTimes.includes(option.value)) {
+                        option.disabled = true;
+                        option.text += ' (занято)';
+                    } else if (option.value) {
+                        option.disabled = false;
+                        option.text = option.value.replace(' (занято)', '');
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>

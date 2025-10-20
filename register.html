@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Регистрация | LuxuryCars</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        input:invalid, select:invalid {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+        }
+        input:valid, select:valid {
+            border-color: #28a745;
+            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+        }
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .form-submit {
+            text-align: center;
+        }
+        .auth-links a {
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .password-hint {
+            font-size: 12px;
+            color: #666;
+            margin-top: 5px;
+        }
+    </style>
+</head>
+<body class="register-page">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LuxuryCars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth">
+                <a href="login.html" class="btn">Вход</a>
+                <a href="register.html" class="btn active">Регистрация</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="auth-form">
+            <div class="container">
+                <h1>Регистрация</h1>
+                <form id="registerForm">
+                    <div class="form-group">
+                        <label for="name">Имя</label>
+                        <input type="text" id="name" required minlength="2" pattern="[А-Яа-яЁёA-Za-z\s]+">
+                        <div class="error-message">Только буквы (минимум 2)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                        <div class="error-message">Введите корректный email</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" required 
+                               pattern="\+7\s?[0-9]{3}\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}">
+                        <div class="error-message">Формат: +7 XXX XXX XX XX</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" required minlength="6">
+                        <div class="error-message">Минимум 6 символов</div>
+                        <div class="password-hint">Пароль должен содержать минимум 6 символов</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Подтвердите пароль</label>
+                        <input type="password" id="confirm-password" required>
+                        <div class="error-message">Пароли должны совпадать</div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-large">Зарегистрироваться</button>
+                    </div>
+                </form>
+                <div class="auth-links">
+                    Уже есть аккаунт? <a href="login.html">Войти</a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>LuxuryCars</h4>
+                    <p>Продажа премиальных автомобилей с 2010 года</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Автозаводская, 23</p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Часы работы</h4>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© <script>document.write(new Date().getFullYear())</script> LuxuryCars. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Валидация телефона
+        const phoneInput = document.getElementById('phone');
+        phoneInput.addEventListener('input', function() {
+            this.value = this.value.replace(/[^0-9+]/g, '');
+            if (!this.value.startsWith('+7') && this.value.length > 0) {
+                this.value = '+7' + this.value;
+            }
+            if (this.value.length > 12) {
+                this.value = this.value.substring(0, 12);
+            }
+        });
+
+        // Проверка паролей
+        const password = document.getElementById('password');
+        const confirmPassword = document.getElementById('confirm-password');
+        
+        function validatePassword() {
+            if (password.value !== confirmPassword.value) {
+                confirmPassword.setCustomValidity('Пароли не совпадают');
+                confirmPassword.nextElementSibling.style.display = 'block';
+            } else {
+                confirmPassword.setCustomValidity('');
+                confirmPassword.nextElementSibling.style.display = 'none';
+            }
+        }
+        
+        password.addEventListener('input', validatePassword);
+        confirmPassword.addEventListener('input', validatePassword);
+
+        // Обработка ошибок
+        const form = document.getElementById('registerForm');
+        const inputs = form.querySelectorAll('input');
+        
+        inputs.forEach(input => {
+            input.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                this.nextElementSibling.style.display = 'block';
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.validity.valid) {
+                    this.nextElementSibling.style.display = 'none';
+                }
+            });
+        });
+        
+        // Отправка формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!this.checkValidity()) {
+                alert('Пожалуйста, заполните все поля корректно!');
+                return;
+            }
+
+            // Проверяем email на админский
+            const email = document.getElementById('email').value;
+            if (email === 'admin@luxurycars.com') {
+                alert('Этот email зарезервирован для администрации');
+                return;
+            }
+
+            // Получаем данные формы
+            const userData = {
+                name: document.getElementById('name').value,
+                email: email,
+                phone: document.getElementById('phone').value,
+                password: document.getElementById('password').value,
+                isAdmin: false
+            };
+
+            // Проверяем, есть ли уже пользователь с таким email
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const existingUser = users.find(user => user.email === userData.email);
+            
+            if (existingUser) {
+                alert('Пользователь с таким email уже зарегистрирован!');
+                return;
+            }
+
+            // Сохраняем нового пользователя
+            users.push(userData);
+            localStorage.setItem('users', JSON.stringify(users));
+            
+            alert('Регистрация успешна! Теперь вы можете войти.');
+            window.location.href = 'login.html';
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,347 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Контакты | LuxuryCars</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+            margin-bottom: 50px;
+        }
+        
+        .contact-card {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 25px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .contact-icon {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+        
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        /* Общие стили валидации */
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 4px;
+            background: rgba(255,255,255,0.05);
+            color: var(--dark);
+            transition: all 0.3s;
+        }
+        
+        .form-group input:invalid,
+        .form-group textarea:invalid,
+        .form-group input.invalid {
+            border-color: #ff6b6b !important;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2) !important;
+        }
+        
+        .form-group input:valid,
+        .form-group textarea:valid {
+            border-color: #28a745 !important;
+            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2) !important;
+        }
+        
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        
+        .form-group {
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        /* Стили для сообщений */
+        .login-required {
+            background-color: #fff3cd;
+            color: #856404;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+        
+        .success-message {
+            background-color: #d4edda;
+            color: #155724;
+            padding: 15px;
+            border-radius: 4px;
+            margin-bottom: 20px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LuxuryCars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li class="active"><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth" id="authSection">
+                <a href="login.html" class="btn">Вход</a>
+                <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="contacts">
+        <div class="container">
+            <h1>Контакты</h1>
+            
+            <!-- Сообщение о необходимости входа -->
+            <div id="loginRequired" class="login-required">
+                <p>Для отправки сообщения необходимо <a href="login.html">войти в аккаунт</a>.</p>
+            </div>
+            
+            <!-- Сообщение об успешной отправке -->
+            <div id="successMessage" class="success-message"></div>
+            
+            <div class="contact-grid">
+                <div class="contact-info">
+                    <h2>Наши контакты</h2>
+                    <p><strong>Адрес:</strong> г. Москва, ул. Автозаводская, 23</p>
+                    <p><strong>Телефон:</strong> +7 (495) 123-45-67</p>
+                    <p><strong>Email:</strong> info@luxurycars.ru</p>
+                    
+                    <h3>Часы работы</h3>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+                
+                <div class="contact-map">
+                    <iframe src="https://yandex.ru/map-widget/v1/?um=constructor%3A1a2b3c4d5e6f7g8h9i0j&amp;source=constructor" width="100%" height="400" frameborder="0"></iframe>
+                </div>
+            </div>
+            
+            <div class="contact-form">
+                <h2>Обратная связь</h2>
+                <form id="feedbackForm">
+                    <div class="form-group">
+                        <label for="name">Ваше имя</label>
+                        <input type="text" id="name" name="name" required minlength="2" pattern="[А-Яа-яЁёA-Za-z\s]+">
+                        <div class="error-message">Только буквы (минимум 2)</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                        <div class="error-message">Введите корректный email</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Телефон</label>
+                        <input type="tel" id="phone" name="phone" required pattern="\+7\s?[0-9]{3}\s?[0-9]{3}\s?[0-9]{2}\s?[0-9]{2}">
+                        <div class="error-message">Формат: +7 XXX XXX XX XX</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="message">Сообщение</label>
+                        <textarea id="message" name="message" rows="5" required minlength="10" maxlength="500"></textarea>
+                        <div class="error-message">Сообщение должно содержать от 10 до 500 символов</div>
+                    </div>
+                    <button type="submit" class="btn btn-large">Отправить</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>LuxuryCars</h4>
+                    <p>Продажа премиальных автомобилей с 2010 года</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Автозаводская, 23</p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Часы работы</h4>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const phoneInput = document.getElementById('phone');
+            const form = document.getElementById('feedbackForm');
+            const inputs = form.querySelectorAll('input, textarea');
+            const loginRequired = document.getElementById('loginRequired');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            const authSection = document.getElementById('authSection');
+            
+            // Проверка авторизации пользователя
+            if (currentUser) {
+                authSection.innerHTML = `
+                    <span class="user-greeting">${currentUser.name}</span>
+                    <a href="#" id="logout" class="btn">Выйти</a>
+                    <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+                `;
+                
+                document.getElementById('logout').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('currentUser');
+                    window.location.reload();
+                });
+                
+                // Автозаполнение данных пользователя
+                document.getElementById('name').value = currentUser.name || '';
+                document.getElementById('email').value = currentUser.email || '';
+                if (currentUser.phone) {
+                    document.getElementById('phone').value = currentUser.phone;
+                }
+            } else {
+                // Показываем сообщение о необходимости входа
+                loginRequired.style.display = 'block';
+            }
+            
+            // Форматирование телефона в реальном времени
+            phoneInput.addEventListener('input', function(e) {
+                let value = this.value.replace(/\D/g, '');
+                
+                if (value.length > 0) {
+                    if (!value.startsWith('7') && !value.startsWith('+7')) {
+                        value = '7' + value;
+                    }
+                    
+                    let formattedValue = '+7';
+                    if (value.length > 1) formattedValue += ' ' + value.substring(1, 4);
+                    if (value.length > 4) formattedValue += ' ' + value.substring(4, 7);
+                    if (value.length > 7) formattedValue += ' ' + value.substring(7, 9);
+                    if (value.length > 9) formattedValue += ' ' + value.substring(9, 11);
+                    
+                    this.value = formattedValue;
+                }
+                
+                // Проверка валидности
+                checkPhoneValidity(this);
+            });
+            
+            // Проверка валидности телефона
+            function checkPhoneValidity(input) {
+                const pattern = /^\+7\s?\d{3}\s?\d{3}\s?\d{2}\s?\d{2}$/;
+                const isValid = pattern.test(input.value);
+                
+                if (input.value && !isValid) {
+                    input.classList.add('invalid');
+                    input.setCustomValidity('Некорректный формат телефона');
+                } else {
+                    input.classList.remove('invalid');
+                    input.setCustomValidity('');
+                }
+            }
+
+            // Обработка валидации для всех полей
+            inputs.forEach(input => {
+                input.addEventListener('invalid', function(e) {
+                    e.preventDefault();
+                    this.nextElementSibling.style.display = 'block';
+                    this.classList.add('invalid');
+                });
+                
+                input.addEventListener('input', function() {
+                    if (this.validity.valid) {
+                        this.nextElementSibling.style.display = 'none';
+                        this.classList.remove('invalid');
+                    }
+                    
+                    // Специальная проверка для телефона
+                    if (this.id === 'phone') {
+                        checkPhoneValidity(this);
+                    }
+                });
+            });
+            
+            // Обработка отправки формы
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                // Проверка авторизации
+                if (!currentUser) {
+                    loginRequired.style.display = 'block';
+                    loginRequired.scrollIntoView({ behavior: 'smooth' });
+                    alert('Для отправки сообщения необходимо войти в аккаунт.');
+                    return;
+                }
+                
+                // Проверка всех полей перед отправкой
+                let isValid = true;
+                inputs.forEach(input => {
+                    if (!input.validity.valid) {
+                        input.nextElementSibling.style.display = 'block';
+                        input.classList.add('invalid');
+                        isValid = false;
+                    }
+                });
+                
+                if (!isValid) return;
+                
+                const feedbackRequest = {
+                    id: Date.now(),
+                    name: form.name.value,
+                    email: form.email.value,
+                    phone: form.phone.value,
+                    message: form.message.value,
+                    date: new Date().toISOString(),
+                    status: 'pending',
+                    userId: currentUser.id // Добавляем ID пользователя
+                };
+                
+                let feedbackRequests = JSON.parse(localStorage.getItem('feedbackRequests')) || [];
+                feedbackRequests.push(feedbackRequest);
+                localStorage.setItem('feedbackRequests', JSON.stringify(feedbackRequests));
+                
+                // Показываем сообщение об успехе
+                showSuccessMessage(form.name.value);
+                this.reset();
+            });
+
+            // Функция показа сообщения об успешной отправке
+            function showSuccessMessage(userName) {
+                const successMessage = document.getElementById('successMessage');
+                successMessage.innerHTML = `
+                    <h3>Спасибо, ${userName}!</h3>
+                    <p>Ваше сообщение успешно отправлено.</p>
+                    <p>Мы ответим вам в ближайшее время.</p>
+                `;
+                successMessage.style.display = 'block';
+                
+                // Прокрутка к сообщению
+                successMessage.scrollIntoView({ behavior: 'smooth' });
+                
+                // Скрываем сообщение через 5 секунд
+                setTimeout(() => {
+                    successMessage.style.display = 'none';
+                }, 5000);
+            }
+        });
+    </script>
+</body>
+</html>

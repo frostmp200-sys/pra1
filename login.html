@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход | LuxuryCars</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили валидации */
+        input:invalid {
+            border-color: #ff6b6b;
+            box-shadow: 0 0 0 2px rgba(255, 107, 107, 0.2);
+        }
+        input:valid {
+            border-color: #28a745;
+            box-shadow: 0 0 0 2px rgba(40, 167, 69, 0.2);
+        }
+        .error-message {
+            color: #ff6b6b;
+            font-size: 14px;
+            margin-top: 5px;
+            display: none;
+        }
+        .auth-links a {
+            text-decoration: underline;
+            font-weight: 500;
+        }
+        .admin-note {
+            margin-top: 20px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body class="login-page">
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LuxuryCars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth">
+                <a href="login.html" class="btn active">Вход</a>
+                <a href="register.html" class="btn">Регистрация</a>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <section class="auth-form">
+            <div class="container">
+                <h1>Вход в систему</h1>
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" required>
+                        <div class="error-message">Введите корректный email</div>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Пароль</label>
+                        <input type="password" id="password" required minlength="6">
+                        <div class="error-message">Минимум 6 символов</div>
+                    </div>
+                    <div class="form-submit">
+                        <button type="submit" class="btn btn-large">Войти</button>
+                    </div>
+                </form>
+                <div class="auth-links">
+                    Нет аккаунта? <a href="register.html">Зарегистрируйтесь</a>
+                </div>
+                <div class="admin-note">
+                    <strong>Доступ в админ-панель:</strong><br>
+                    Email: admin@luxurycars.com<br>
+                    Пароль: Admin123!
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>LuxuryCars</h4>
+                    <p>Продажа премиальных автомобилей с 2010 года</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Автозаводская, 23</p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Часы работы</h4>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© <script>document.write(new Date().getFullYear())</script> LuxuryCars. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Обработка ошибок
+        const form = document.getElementById('loginForm');
+        const inputs = form.querySelectorAll('input');
+        
+        inputs.forEach(input => {
+            input.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                this.nextElementSibling.style.display = 'block';
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.validity.valid) {
+                    this.nextElementSibling.style.display = 'none';
+                }
+            });
+        });
+        
+        // Отправка формы
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            if (!this.checkValidity()) {
+                alert('Пожалуйста, заполните все поля корректно!');
+                return;
+            }
+
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+
+            // Проверка входа админа
+            if (email === 'admin@luxurycars.com' && password === 'Admin123!') {
+                // Создаем запись админа
+                const adminUser = {
+                    name: 'Администратор',
+                    email: 'admin@luxurycars.com',
+                    isAdmin: true
+                };
+                localStorage.setItem('currentUser', JSON.stringify(adminUser));
+                window.location.href = 'admin.html';
+                return;
+            }
+
+            // Проверка обычных пользователей
+            const users = JSON.parse(localStorage.getItem('users')) || [];
+            const user = users.find(user => 
+                user.email === email && user.password === password
+            );
+
+            if (user) {
+                // Сохраняем информацию о текущем пользователе
+                localStorage.setItem('currentUser', JSON.stringify(user));
+                alert('Вход выполнен успешно!');
+                window.location.href = 'index.html';
+            } else {
+                alert('Неверный email или пароль');
+            }
+        });
+    </script>
+</body>
+</html>

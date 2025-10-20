@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Каталог автомобилей | LuxuryCars</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .filter-group {
+            display: inline-block;
+            margin-right: 15px;
+        }
+        
+        .filter-group label {
+            margin-right: 8px;
+            font-weight: 500;
+        }
+        
+        .filter-group select {
+            padding: 8px 12px;
+            border-radius: 4px;
+            border: 1px solid #ddd;
+            background: var(--light);
+            color: var(--dark);
+        }
+        
+        .no-results {
+            text-align: center;
+            padding: 50px;
+            font-size: 18px;
+            color: var(--gray);
+            display: none;
+        }
+        
+        .user-greeting {
+            color: var(--dark);
+            margin-right: 15px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+        
+        .btn-secondary {
+            background: var(--gray);
+            color: var(--dark);
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LuxuryCars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li class="active"><a href="catalog.html">Каталог</a></li>
+                    <li><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth" id="authSection">
+                <a href="login.html" class="btn">Вход</a>
+                <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="catalog">
+        <div class="container">
+            <h1>Каталог автомобилей</h1>
+            
+            <div class="filters">
+                <form id="filterForm">
+                    <div class="filter-group">
+                        <label for="brand">Марка:</label>
+                        <select id="brand" name="brand">
+                            <option value="">Все</option>
+                            <option value="bmw">BMW</option>
+                            <option value="mercedes">Mercedes</option>
+                            <option value="porsche">Porsche</option>
+                            <option value="lamborghini">Lamborghini</option>
+                            <option value="cadillac">Cadillac</option>
+                            <option value="bugatti">Bugatti</option>
+                            <option value="tesla">Tesla</option>
+                            <option value="rolls-royce">Rolls-Royce</option>
+                        </select>
+                    </div>
+                    <button type="button" id="applyFilter" class="btn">Применить</button>
+                    <button type="button" id="resetFilter" class="btn btn-secondary">Сбросить</button>
+                </form>
+            </div>
+            
+            <div class="no-results">
+                <p>Автомобилей выбранной марки не найдено</p>
+            </div>
+            
+            <div class="cars-grid">
+                <!-- BMW M8 -->
+                <div class="car-card" data-brand="bmw">
+                    <a href="car-bmw-m8.html">
+                        <div class="car-image">
+                            <img src="bmww.jpg" alt="BMW M8 Competition">
+                        </div>
+                        <h3>BMW M8 Competition</h3>
+                        <div class="car-info">
+                            <span>625 л.с.</span>
+                            <span>3.2 сек</span>
+                            <span>12.9 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Mercedes S 580 -->
+                <div class="car-card" data-brand="mercedes">
+                    <a href="car-mercedes-s.html">
+                        <div class="car-image">
+                            <img src="mers.jpg" alt="Mercedes S 580">
+                        </div>
+                        <h3>Mercedes S 580</h3>
+                        <div class="car-info">
+                            <span>503 л.с.</span>
+                            <span>4.4 сек</span>
+                            <span>14.2 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Porsche 911 Turbo S -->
+                <div class="car-card" data-brand="porsche">
+                    <a href="car-porsche-911.html">
+                        <div class="car-image">
+                            <img src="porsh.jpg" alt="Porsche 911 Turbo S">
+                        </div>
+                        <h3>Porsche 911 Turbo S</h3>
+                        <div class="car-info">
+                            <span>650 л.с.</span>
+                            <span>2.7 сек</span>
+                            <span>16.8 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Lamborghini Urus -->
+                <div class="car-card" data-brand="lamborghini">
+                    <a href="car-lamborghini-urus.html">
+                        <div class="car-image">
+                            <img src="urus.jpg" alt="Lamborghini Urus">
+                        </div>
+                        <h3>Lamborghini Urus</h3>
+                        <div class="car-info">
+                            <span>650 л.с.</span>
+                            <span>3.6 сек</span>
+                            <span>22 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Lamborghini Aventador -->
+                <div class="car-card" data-brand="lamborghini">
+                    <a href="car-lamborghini-aventador.html">
+                        <div class="car-image">
+                            <img src="aven.jpg" alt="Lamborghini Aventador">
+                        </div>
+                        <h3>Lamborghini Aventador SVJ</h3>
+                        <div class="car-info">
+                            <span>770 л.с.</span>
+                            <span>2.8 сек</span>
+                            <span>58 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Cadillac Escalade -->
+                <div class="car-card" data-brand="cadillac">
+                    <a href="car-cadillac-escalade.html">
+                        <div class="car-image">
+                            <img src="cadi.jpg" alt="Cadillac Escalade">
+                        </div>
+                        <h3>Cadillac Escalade</h3>
+                        <div class="car-info">
+                            <span>426 л.с.</span>
+                            <span>6.2 л V8</span>
+                            <span>10.5 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Bugatti Chiron -->
+                <div class="car-card" data-brand="bugatti">
+                    <a href="car-bugatti-chiron.html">
+                        <div class="car-image">
+                            <img src="buga.jpg" alt="Bugatti Chiron">
+                        </div>
+                        <h3>Bugatti Chiron</h3>
+                        <div class="car-info">
+                            <span>1500 л.с.</span>
+                            <span>2.4 сек</span>
+                            <span>320 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Tesla Cybertruck Cyberbeast -->
+                <div class="car-card" data-brand="tesla">
+                    <a href="car-tesla-cyberbeast.html">
+                        <div class="car-image">
+                            <img src="tesla.jpg" alt="Tesla Cybertruck Cyberbeast">
+                        </div>
+                        <h3>Tesla Cybertruck Cyberbeast</h3>
+                        <div class="car-info">
+                            <span>845 л.с.</span>
+                            <span>2.6 сек</span>
+                            <span>12 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- Rolls-Royce Phantom -->
+                <div class="car-card" data-brand="rolls-royce">
+                    <a href="car-rolls-royce-phantom.html">
+                        <div class="car-image">
+                            <img src="RR.jpg" alt="Rolls-Royce Phantom">
+                        </div>
+                        <h3>Rolls-Royce Phantom VIII</h3>
+                        <div class="car-info">
+                            <span>571 л.с.</span>
+                            <span>5.3 сек</span>
+                            <span>55 млн ₽</span>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>LuxuryCars</h4>
+                    <p>Продажа премиальных автомобилей с 2010 года</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Автозаводская, 23</p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Часы работы</h4>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 LuxuryCars. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const filterForm = document.getElementById('filterForm');
+            const brandSelect = document.getElementById('brand');
+            const applyBtn = document.getElementById('applyFilter');
+            const resetBtn = document.getElementById('resetFilter');
+            const carCards = document.querySelectorAll('.car-card');
+            const noResults = document.querySelector('.no-results');
+            
+            function filterCars() {
+                const selectedBrand = brandSelect.value;
+                let visibleCount = 0;
+                
+                carCards.forEach(card => {
+                    const cardBrand = card.getAttribute('data-brand');
+                    
+                    if (!selectedBrand || cardBrand === selectedBrand) {
+                        card.style.display = 'block';
+                        visibleCount++;
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+                
+                if (visibleCount === 0) {
+                    noResults.style.display = 'block';
+                } else {
+                    noResults.style.display = 'none';
+                }
+            }
+            
+            applyBtn.addEventListener('click', filterCars);
+            
+            resetBtn.addEventListener('click', function() {
+                brandSelect.value = '';
+                filterCars();
+            });
+            
+            filterCars();
+
+            const authSection = document.getElementById('authSection');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (currentUser) {
+                authSection.innerHTML = `
+                    <span class="user-greeting">${currentUser.name}</span>
+                    <a href="#" id="logout" class="btn">Выйти</a>
+                    <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+                `;
+                
+                document.getElementById('logout').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('currentUser');
+                    window.location.reload();
+                });
+            }
+        });
+    </script>
+</body>
+</html>

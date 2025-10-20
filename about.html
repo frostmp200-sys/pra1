@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>О компании | LuxuryCars</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Стили для страницы "О нас" */
+        .about {
+            background-color: #1a1a1a;
+            padding: 60px 0;
+            color: white;
+        }
+        
+        .about .container > h1 {
+            font-size: 36px;
+            margin-bottom: 40px;
+            text-align: center;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        .about-content {
+            display: flex;
+            gap: 40px;
+            margin-bottom: 60px;
+            align-items: center;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h2 {
+            font-size: 28px;
+            margin-top: 30px;
+            margin-bottom: 20px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            position: relative;
+            padding-bottom: 10px;
+            color: white;
+        }
+        
+        .about-text h2:after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: 0;
+            width: 60px;
+            height: 2px;
+            background: white;
+        }
+        
+        .about-text p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 16px;
+            color: white;
+        }
+        
+        .about-text ul {
+            list-style: none;
+            padding: 0;
+            margin: 25px 0;
+        }
+        
+        .about-text ul li {
+            position: relative;
+            padding-left: 25px;
+            margin-bottom: 12px;
+            line-height: 1.6;
+            font-size: 16px;
+            color: white;
+        }
+        
+        .about-text ul li:before {
+            content: '•';
+            position: absolute;
+            left: 0;
+            font-weight: bold;
+            font-size: 20px;
+            color: white;
+        }
+        
+        .about-image {
+            flex: 1;
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.03);
+        }
+        
+        /* Стили для команды */
+        .team {
+            margin-top: 60px;
+            padding-top: 40px;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .team h2 {
+            font-size: 28px;
+            text-align: center;
+            margin-bottom: 40px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+        }
+        
+        .team-member {
+            background: rgba(255,255,255,0.1);
+            border-radius: 8px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            text-align: center;
+            padding-bottom: 25px;
+        }
+        
+        .team-member:hover {
+            transform: translateY(-5px);
+            background: rgba(255,255,255,0.2);
+        }
+        
+        .team-member img {
+            width: 100%;
+            height: 300px;
+            object-fit: cover;
+            object-position: top;
+            margin-bottom: 20px;
+        }
+        
+        .team-member h3 {
+            font-size: 22px;
+            margin: 0 0 5px 0;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: white;
+        }
+        
+        .team-member p {
+            margin: 0;
+            font-size: 15px;
+            color: rgba(255,255,255,0.8);
+        }
+        
+        /* Адаптивность */
+        @media (max-width: 768px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .about .container > h1,
+            .about-text h2,
+            .team h2 {
+                font-size: 24px;
+            }
+            
+            .team-member h3 {
+                font-size: 20px;
+            }
+        }
+
+        .user-greeting {
+            color: white;
+            margin-right: 15px;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <h1>LuxuryCars</h1>
+            </div>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Главная</a></li>
+                    <li><a href="catalog.html">Каталог</a></li>
+                    <li class="active"><a href="about.html">О нас</a></li>
+                    <li><a href="contacts.html">Контакты</a></li>
+                </ul>
+            </nav>
+            <div class="auth" id="authSection">
+                <a href="login.html" class="btn">Вход</a>
+                <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="about">
+        <div class="container">
+            <h1>О компании</h1>
+            
+            <div class="about-content">
+                <div class="about-text">
+                    <h2>Наша история</h2>
+                    <p>LuxuryCars - ведущий дилер премиальных автомобилей в России с 2010 года. За это время мы заслужили репутацию надежного партнера, предлагающего исключительный сервис и лучшие автомобили премиум-класса.</p>
+                    <p>Начав с небольшого салона в Москве, сегодня мы представляем интересы ведущих мировых автопроизводителей и имеем филиалы в 5 крупнейших городах России.</p>
+                    
+                    <h2>Наши принципы</h2>
+                    <ul>
+                        <li>Только оригинальные автомобили с полной сервисной историей</li>
+                        <li>Прозрачные условия покупки и обслуживания</li>
+                        <li>Индивидуальный подход к каждому клиенту</li>
+                        <li>Высокий уровень сервиса на всех этапах</li>
+                    </ul>
+                </div>
+                
+                <div class="about-image">
+                    <img src="salon.jpg" alt="Наш автосалон">
+                </div>
+            </div>
+            
+            <div class="team">
+                <h2>Наша команда</h2>
+                <div class="team-grid">
+                    <div class="team-member">
+                        <img src="ivan.jpg" alt="Иван Петров">
+                        <h3>Иван Петров</h3>
+                        <p>Генеральный директор</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="anna.jpg" alt="Анна Смирнова">
+                        <h3>Анна Смирнова</h3>
+                        <p>Менеджер по продажам</p>
+                    </div>
+                    <div class="team-member">
+                        <img src="dima.jpg" alt="Дмитрий Иванов">
+                        <h3>Дмитрий Иванов</h3>
+                        <p>Технический директор</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-columns">
+                <div class="footer-column">
+                    <h4>LuxuryCars</h4>
+                    <p>Продажа премиальных автомобилей с 2010 года</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Контакты</h4>
+                    <p>г. Москва, ул. Автозаводская, 23</p>
+                    <p>+7 (495) 123-45-67</p>
+                </div>
+                <div class="footer-column">
+                    <h4>Часы работы</h4>
+                    <p>Пн-Пт: 9:00 - 21:00</p>
+                    <p>Сб-Вс: 10:00 - 20:00</p>
+                </div>
+            </div>
+            <div class="copyright">
+                <p>© 2025 LuxuryCars. Все права защищены.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Проверка авторизации при загрузке страницы
+        document.addEventListener('DOMContentLoaded', function() {
+            const authSection = document.getElementById('authSection');
+            const currentUser = JSON.parse(localStorage.getItem('currentUser'));
+            
+            if (currentUser) {
+                // Если пользователь авторизован, меняем блок авторизации
+                authSection.innerHTML = `
+                    <span class="user-greeting">${currentUser.name}</span>
+                    <a href="#" id="logout" class="btn">Выйти</a>
+                    <a href="appointment.html" class="btn btn-primary">Тест-драйв</a>
+                `;
+                
+                // Обработчик выхода
+                document.getElementById('logout').addEventListener('click', function(e) {
+                    e.preventDefault();
+                    localStorage.removeItem('currentUser');
+                    window.location.reload();
+                });
+            }
+        });
+    </script>
+</body>
+</html>
